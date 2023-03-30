@@ -1,0 +1,8 @@
+2023-03-30T09:42:01.353+02:00 ERROR 14732 --- [main] c.b.b.Block5LoggingApplication           : Mensaje a nivel de ERROR
+2023-03-30T09:42:01.355+02:00 ERROR 14732 --- [main] c.b.b.Block5LoggingApplication           : Segundo Mensaje a nivel de ERROR
+2023-03-30T09:42:19.282+02:00 ERROR 4024 --- [main] c.b.b.Block5LoggingApplication           : Mensaje a nivel de ERROR
+2023-03-30T09:42:19.284+02:00 ERROR 4024 --- [main] c.b.b.Block5LoggingApplication           : Segundo Mensaje a nivel de ERROR
+2023-03-30T09:43:00.648+02:00 ERROR 9828 --- [main] c.b.b.Block5LoggingApplication           : Mensaje a nivel de ERROR
+2023-03-30T09:43:00.650+02:00 ERROR 9828 --- [main] c.b.b.Block5LoggingApplication           : Segundo Mensaje a nivel de ERROR
+2023-03-30T09:44:24.656+02:00 ERROR 17908 --- [main] c.b.b.Block5LoggingApplication           : Mensaje a nivel de ERROR
+2023-03-30T09:44:24.659+02:00 ERROR 17908 --- [main] c.b.b.Block5LoggingApplication           : Segundo Mensaje a nivel de ERROR
