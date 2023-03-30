@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Pro" type="Application" factoryName="Application">
+    <option name="ALTERNATIVE_JRE_PATH" value="17" />
+    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+    <envs>
+      <env name="spring.profiles.active" value="PRODUCTION" />
+      <env name="bd.url" value="pro.bosonit.com:5432" />
+    </envs>
+    <option name="MAIN_CLASS_NAME" value="com.block5profiles.block5profiles.Block5ProfilesApplication" />
+    <module name="block5-profiles" />
+    <option name="VM_PARAMETERS" value="-Dspring.profiles.active=pro" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
