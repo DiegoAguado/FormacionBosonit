@@ -14,6 +14,8 @@ public class Block6SimpleControllersApplication {
 		SpringApplication.run(Block6SimpleControllersApplication.class, args);
 	}
 
+	//https://elements.getpostman.com/redirect?entityId=26635755-0efd62ae-17b5-4767-8daa-ce20ca7eb1a4&entityType=collection
+
 	@GetMapping(value = "/user/{nombre}")
 	public String usuario(@PathVariable String nombre){
 		return "Hola " + nombre;
