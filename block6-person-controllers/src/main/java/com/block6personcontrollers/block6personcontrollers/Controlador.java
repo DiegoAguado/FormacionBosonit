@@ -4,26 +4,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/controlador")
 public class Controlador {
     @Autowired
-    @Qualifier("returnP1")
-    Persona p1;
+    @Qualifier("bean1")
+    Persona bean1;
+
     @Autowired
-    @Qualifier("returnP2")
-    Persona p2;
+    @Qualifier("bean2")
+    Persona bean2;
+
     @Autowired
-    @Qualifier("returnP3")
-    Persona p3;
-    @GetMapping(value = "/bean/{bean}")
+    @Qualifier("bean3")
+    Persona bean3;
+    @GetMapping(value = "/controlador/bean/{bean}")
     public Persona getBean(@PathVariable String bean){
-        if(bean.equalsIgnoreCase(p1.getNombre())) return p1;
-        if(bean.equalsIgnoreCase(p2.getNombre())) return p2;
-        if(bean.equalsIgnoreCase(p3.getNombre())) return p3;
+        if(bean.equalsIgnoreCase(bean1.getNombre())) return bean1;
+        if(bean.equalsIgnoreCase(bean2.getNombre())) return bean2;
+        if(bean.equalsIgnoreCase(bean3.getNombre())) return bean3;
         else return null;
     }
 }
