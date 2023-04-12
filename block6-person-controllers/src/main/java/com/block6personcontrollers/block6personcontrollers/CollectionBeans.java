@@ -13,9 +13,6 @@ public class CollectionBeans {
 
     public Persona p = new Persona();
     public ArrayList<Ciudad> ciudades = new ArrayList<>();
-    public Persona p1 = new Persona();
-    public Persona p2 = new Persona();
-    public Persona p3 = new Persona();
 
     @Bean
     Persona returnPersona(){
@@ -29,19 +26,22 @@ public class CollectionBeans {
 
     @Bean
     Persona returnP1(){
+        Persona p1 = new Persona();
         p1.setNombre("A");
         return p1;
     }
 
     @Bean
     Persona returnP2(){
-        p2.setNombre("A");
+        Persona p2 = new Persona();
+        p2.setNombre("B");
         return p2;
     }
 
     @Bean
     Persona returnP3(){
-        p3.setNombre("A");
+        Persona p3 = new Persona();
+        p3.setNombre("C");
         return p3;
     }
 }
