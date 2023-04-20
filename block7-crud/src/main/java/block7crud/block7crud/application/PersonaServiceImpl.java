@@ -52,6 +52,4 @@ public class PersonaServiceImpl implements PersonaService{
         personaRepository.findById(id).orElseThrow();
         personaRepository.deleteById(id);
     }
-
-
 }
