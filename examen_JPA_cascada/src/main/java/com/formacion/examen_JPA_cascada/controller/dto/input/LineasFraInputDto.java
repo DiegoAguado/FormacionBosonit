@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LineasFraInputDto {
-    private CabeceraFra idFra;
+    private int idFra;
     private String proNomb;
     private double cantidad;
     private double precio;

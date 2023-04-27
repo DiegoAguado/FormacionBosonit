@@ -27,11 +27,4 @@ public class CabeceraFraServiceImpl implements CabeceraFraService{
         cabeceraFraRepository.findById(idFra).orElseThrow(EntityNotFoundException::new);
         cabeceraFraRepository.deleteById(idFra);
     }
-
-    @Override
-    public CabeceraFraOutputDto updateFactura(int idFra, LineasFraInputDto lineasFraInputDto) throws EntityNotFoundException{
-        CabeceraFra cabeceraFra = cabeceraFraRepository.findById(idFra).orElseThrow(EntityNotFoundException::new);
-        cabeceraFra.getLineas().add(new LineasFra(lineasFraInputDto));
-        return cabeceraFraRepository.save(cabeceraFra).cabeceraFraToCabeceraFraOutputDto();
-    }
 }

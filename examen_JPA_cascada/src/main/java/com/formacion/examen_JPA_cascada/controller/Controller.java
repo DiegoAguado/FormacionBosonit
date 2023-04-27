@@ -26,11 +26,6 @@ public class Controller {
         return ResponseEntity.ok(cabeceraFraService.getAllFacturas());
     }
 
-    @GetMapping(value = "/lineas")
-    public ResponseEntity<List<LineasFraOutputDto>> getLineas(){
-        return ResponseEntity.ok(lineasFraService.getAllLineas());
-    }
-
     @DeleteMapping(value = "/{idFra}")
     public ResponseEntity<CabeceraFraOutputDto> deleteFactura(@PathVariable int idFra)throws EntityNotFoundException {
         try{
@@ -42,9 +37,9 @@ public class Controller {
     }
 
     @PostMapping(value = "/linea/{idFra}")
-    public ResponseEntity<CabeceraFraOutputDto> updateFactura(@PathVariable int idFra, @RequestBody LineasFraInputDto lineasFraInputDto) throws EntityNotFoundException{
+    public ResponseEntity<LineasFraOutputDto> addLinea(@PathVariable int idFra, @RequestBody LineasFraInputDto lineasFraInputDto) throws EntityNotFoundException{
         try{
-            return ResponseEntity.ok().body(cabeceraFraService.updateFactura(idFra, lineasFraInputDto));
+            return ResponseEntity.ok().body(lineasFraService.addLinea(idFra, lineasFraInputDto));
         }catch (EntityNotFoundException e){
             return ResponseEntity.notFound().build();
         }

@@ -19,7 +19,7 @@ public class LineasFra {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
     @ManyToOne
-    @JoinColumn(name = "cabeceras", nullable = false, unique = true)
+    @JoinColumn(name = "cabeceras")
     private CabeceraFra idFra;
     @Column(nullable = false)
     private String proNomb;
@@ -33,7 +33,6 @@ public class LineasFra {
     }
 
     public LineasFra(LineasFraInputDto lineasFraInputDto){
-        this.idFra = lineasFraInputDto.getIdFra();
         this.proNomb = lineasFraInputDto.getProNomb();
         this.cantidad = lineasFraInputDto.getCantidad();
         this.precio = lineasFraInputDto.getPrecio();

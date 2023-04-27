@@ -38,6 +38,6 @@ public class ExamenJpaCascadaApplication  implements CommandLineRunner {
 						new CabeceraFraInputDto(clienteRepository.save(
 								new Cliente(
 										new ClienteInputDto("Diego", cabeceraFraRepository.findAll()))), 0.0, lineasFraRepository.findById(1).stream().toList())));
-		lineasFraRepository.save(new LineasFra(new LineasFraInputDto(cabeceraFraRepository.findById(1).get(),"casco",0,0)));
+		lineasFraRepository.save(new LineasFra(new LineasFraInputDto(1,"casco",0,0)));
 	}
 }

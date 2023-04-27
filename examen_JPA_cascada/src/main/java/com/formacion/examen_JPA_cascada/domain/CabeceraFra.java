@@ -26,7 +26,7 @@ public class CabeceraFra {
     private Cliente cli_codi;
     @Column
     private double importeFra;
-    @OneToMany(cascade = {CascadeType.ALL,CascadeType.PERSIST,CascadeType.MERGE},mappedBy = "idFra")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "idFra")
     private List<LineasFra> lineas;
 
     public CabeceraFraOutputDto cabeceraFraToCabeceraFraOutputDto(){
@@ -38,5 +38,9 @@ public class CabeceraFra {
         this.importeFra = cabeceraFraInputDto.getImporteFra();
         this.lineas = cabeceraFraInputDto.getLineas();
         this.cli_codi = cabeceraFraInputDto.getCli_codi();
+    }
+
+    public void addLineas(LineasFra lineasFra) {
+        this.lineas.add(lineasFra);
     }
 }
