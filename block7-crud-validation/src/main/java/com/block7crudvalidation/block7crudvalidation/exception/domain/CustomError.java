@@ -1,6 +1,6 @@
-package com.block7crudvalidation.block7crudvalidation.domain.exception;
+package com.block7crudvalidation.block7crudvalidation.exception.domain;
 
-import com.block7crudvalidation.block7crudvalidation.controller.dto.output.CustomErrorOutputDto;
+import com.block7crudvalidation.block7crudvalidation.exception.controller.dto.CustomErrorOutputDto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

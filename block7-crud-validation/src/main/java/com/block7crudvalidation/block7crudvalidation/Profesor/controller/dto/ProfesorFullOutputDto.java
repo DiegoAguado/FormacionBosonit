@@ -1,4 +1,4 @@
-package com.block7crudvalidation.block7crudvalidation.Persona.controller.dto;
+package com.block7crudvalidation.block7crudvalidation.Profesor.controller.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,11 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PersonaInputDto {
+public class ProfesorFullOutputDto {
+    int id_Profesor;
+    int id_persona;
+    String comments;
+    String branch;
     String usuario;
     String password;
     String name;

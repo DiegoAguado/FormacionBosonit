@@ -1,4 +1,4 @@
-package com.block7crudvalidation.block7crudvalidation.Estudiante.controller.dto.output;
+package com.block7crudvalidation.block7crudvalidation.exception.controller.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

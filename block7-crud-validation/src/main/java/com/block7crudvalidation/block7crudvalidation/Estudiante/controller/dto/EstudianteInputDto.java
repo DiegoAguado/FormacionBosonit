@@ -1,19 +1,18 @@
-package com.block7crudvalidation.block7crudvalidation.Estudiante.controller.dto.input;
+package com.block7crudvalidation.block7crudvalidation.Estudiante.controller.dto;
 
-import com.block7crudvalidation.block7crudvalidation.Estudiante.domain.Estudiante_Asignatura;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.block7crudvalidation.block7crudvalidation.Asignatura.domain.Asignatura;
+import lombok.*;
 
-import java.util.List;
+import java.util.ArrayList;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class EstudianteInputDto {
     int id_Persona;
-    Integer num_hours_week;
+    int num_hours_week;
     String comments;
-    int id_Profesor;
+    String id_Profesor;
     String branch;
-    List<Estudiante_Asignatura> estudios;
+    ArrayList<Asignatura> asignaturas;
 }

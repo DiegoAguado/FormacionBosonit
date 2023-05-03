@@ -1,4 +1,4 @@
-package com.block7crudvalidation.block7crudvalidation.domain.exception;
+package com.block7crudvalidation.block7crudvalidation.exception.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

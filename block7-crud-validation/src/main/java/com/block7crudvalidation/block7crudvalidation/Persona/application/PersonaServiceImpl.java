@@ -1,22 +1,28 @@
-package com.block7crudvalidation.block7crudvalidation.application.Persona;
+package com.block7crudvalidation.block7crudvalidation.Persona.application;
 
-import com.block7crudvalidation.block7crudvalidation.domain.exception.EntityNotFoundException;
-import com.block7crudvalidation.block7crudvalidation.domain.exception.UnprocessableEntityException;
-import com.block7crudvalidation.block7crudvalidation.controller.dto.input.PersonaInputDto;
-import com.block7crudvalidation.block7crudvalidation.controller.dto.output.PersonaOutputDto;
-import com.block7crudvalidation.block7crudvalidation.domain.Persona;
-import com.block7crudvalidation.block7crudvalidation.domain.mapper.PersonaMapper;
-import com.block7crudvalidation.block7crudvalidation.repository.PersonaRepository;
+import com.block7crudvalidation.block7crudvalidation.Estudiante.domain.Estudiante;
+import com.block7crudvalidation.block7crudvalidation.Estudiante.repository.EstudianteRepository;
+import com.block7crudvalidation.block7crudvalidation.Profesor.domain.Profesor;
+import com.block7crudvalidation.block7crudvalidation.Profesor.repository.ProfesorRepository;
+import com.block7crudvalidation.block7crudvalidation.exception.domain.EntityNotFoundException;
+import com.block7crudvalidation.block7crudvalidation.exception.domain.UnprocessableEntityException;
+import com.block7crudvalidation.block7crudvalidation.Persona.controller.dto.PersonaInputDto;
+import com.block7crudvalidation.block7crudvalidation.Persona.controller.dto.PersonaOutputDto;
+import com.block7crudvalidation.block7crudvalidation.Persona.domain.Persona;
+import com.block7crudvalidation.block7crudvalidation.Persona.repository.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class PersonaServiceImpl implements PersonaService {
     @Autowired
     PersonaRepository personaRepository;
+    @Autowired
+    EstudianteRepository estudianteRepository;
+    @Autowired
+    ProfesorRepository profesorRepository;
 
     @Override
     public PersonaInputDto validacion(PersonaInputDto personaInputDto) throws UnprocessableEntityException {
@@ -42,36 +48,48 @@ public class PersonaServiceImpl implements PersonaService {
 
     @Override
     public PersonaOutputDto addPersona(PersonaInputDto personaInputDto) {
-        Persona persona = PersonaMapper.mapper.personaInputDtoToPersona(personaInputDto);
-        return PersonaMapper.mapper
-                .personaToPersonOutputDto(
-                        personaRepository.save(persona));
+        Persona persona = new Persona(personaInputDto);
+        return personaRepository.save(persona).personaToPersonOutputDto();
+    }
+
+    public Object getDetalles(int id_Persona) {
+        Persona persona = personaRepository.findById(id_Persona).orElseThrow();
+        Estudiante estudiante = persona.getEstudiante();
+        Profesor profesor = persona.getProfesor();
+        if (profesor != null) {
+            return personaRepository.getPersonaProfesor(id_Persona).personaToPersonaProfesorOutputDto();
+        } else if (estudiante != null) {
+            return personaRepository.getPersonaEstudiante(id_Persona).personaToPersonaEstudianteOutputDto();
+        }else{
+            return persona.personaToPersonOutputDto();
+        }
     }
 
     @Override
     public PersonaOutputDto getPersonaById_Persona(int id_Persona) throws EntityNotFoundException {
-        return PersonaMapper.mapper
-                .personaToPersonOutputDto(
-                        personaRepository.findById(
-                                id_Persona).orElseThrow(EntityNotFoundException::new));
+        return personaRepository.findById(id_Persona).orElseThrow(EntityNotFoundException::new).personaToPersonOutputDto();
     }
 
+    @Override
     public List<PersonaOutputDto> getPersonaByUsuario(String usuario) throws EntityNotFoundException {
-        return personaRepository.findByUsuarioLike(usuario).stream().map(PersonaMapper.mapper::personaToPersonOutputDto).toList();
+        return personaRepository.findByUsuarioLike(usuario).stream().map(Persona::personaToPersonOutputDto).toList();
     }
 
+    @Override
     public List<PersonaOutputDto> getPersonas() {
-        return personaRepository.findAll().stream().map(PersonaMapper.mapper::personaToPersonOutputDto).toList();
+        return personaRepository.findAll().stream().map(Persona::personaToPersonOutputDto).toList();
     }
 
+    @Override
     public void deleteById_Persona(int id_Persona) throws EntityNotFoundException {
         personaRepository.findById(id_Persona).orElseThrow(EntityNotFoundException::new);
         personaRepository.deleteById(id_Persona);
     }
 
+    @Override
     public PersonaOutputDto updatePersonaById_Persona(int id_Persona, PersonaInputDto personaInputDto) throws EntityNotFoundException {
-        Persona persona = PersonaMapper.mapper.personaInputDtoToPersona(personaInputDto);
+        Persona persona = new Persona(personaInputDto);
         persona.setId_persona(personaRepository.findById(id_Persona).orElseThrow(EntityNotFoundException::new).getId_persona());
-        return PersonaMapper.mapper.personaToPersonOutputDto(personaRepository.save(persona));
+        return personaRepository.save(persona).personaToPersonOutputDto();
     }
 }
