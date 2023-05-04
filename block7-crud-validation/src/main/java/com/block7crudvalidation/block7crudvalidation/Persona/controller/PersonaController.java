@@ -1,14 +1,17 @@
 package com.block7crudvalidation.block7crudvalidation.Persona.controller;
 
-import com.block7crudvalidation.block7crudvalidation.Estudiante.application.EstudianteService;
+import com.block7crudvalidation.block7crudvalidation.Feign.MyFeign;
 import com.block7crudvalidation.block7crudvalidation.Persona.application.PersonaService;
+import com.block7crudvalidation.block7crudvalidation.Profesor.controller.dto.ProfesorOutputDto;
 import com.block7crudvalidation.block7crudvalidation.exception.domain.EntityNotFoundException;
 import com.block7crudvalidation.block7crudvalidation.exception.domain.UnprocessableEntityException;
 import com.block7crudvalidation.block7crudvalidation.Persona.controller.dto.PersonaInputDto;
 import com.block7crudvalidation.block7crudvalidation.Persona.controller.dto.PersonaOutputDto;
+import feign.Feign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -19,8 +22,6 @@ import java.util.List;
 public class PersonaController {
     @Autowired
     PersonaService personaService;
-    @Autowired
-    EstudianteService estudianteService;
 
     @PostMapping
     public ResponseEntity<PersonaOutputDto> addPersona(@RequestBody PersonaInputDto personaInputDto) throws UnprocessableEntityException {
@@ -95,5 +96,17 @@ public class PersonaController {
         } catch (UnprocessableEntityException e) {
             throw new UnprocessableEntityException(e.getMessage());
         }
+    }
+
+    /*@GetMapping("/profesor/{id}")
+    public ResponseEntity<ProfesorOutputDto> getProfesor(@PathVariable int id) throws EntityNotFoundException {
+        ProfesorOutputDto profesorOutputDto = new RestTemplate().getForObject("http://localhost:8080/profesor/"+id, ProfesorOutputDto.class);
+        return ResponseEntity.ok().body(profesorOutputDto);
+    }*/
+
+    @GetMapping("/profesor/{id_Profesor}")
+    public ResponseEntity<String> getProfesorFeign(@PathVariable int id_Profesor) throws EntityNotFoundException {
+        MyFeign myFeign = Feign.builder().target(MyFeign.class, "http://localhost:8081/profesor/"+id_Profesor);
+        return ResponseEntity.ok().body(myFeign.getProfesor());
     }
 }

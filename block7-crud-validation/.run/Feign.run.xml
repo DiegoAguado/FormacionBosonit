@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Feign" type="Application" factoryName="Application">
+    <envs>
+      <env name="spring_profiles_active" value="myFeign" />
+    </envs>
+    <option name="MAIN_CLASS_NAME" value="com.block7crudvalidation.block7crudvalidation.Block7CrudValidationApplication" />
+    <module name="block7-crud-validation" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

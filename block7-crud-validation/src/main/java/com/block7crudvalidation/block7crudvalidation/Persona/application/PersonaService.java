@@ -4,6 +4,7 @@ import com.block7crudvalidation.block7crudvalidation.Estudiante.controller.dto.E
 import com.block7crudvalidation.block7crudvalidation.Estudiante.controller.dto.EstudianteOutputDto;
 import com.block7crudvalidation.block7crudvalidation.Persona.domain.Persona;
 import com.block7crudvalidation.block7crudvalidation.Profesor.controller.dto.ProfesorFullOutputDto;
+import com.block7crudvalidation.block7crudvalidation.Profesor.controller.dto.ProfesorOutputDto;
 import com.block7crudvalidation.block7crudvalidation.exception.domain.EntityNotFoundException;
 import com.block7crudvalidation.block7crudvalidation.exception.domain.UnprocessableEntityException;
 import com.block7crudvalidation.block7crudvalidation.Persona.controller.dto.PersonaInputDto;

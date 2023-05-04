@@ -2,6 +2,7 @@ package com.block7crudvalidation.block7crudvalidation.Persona.application;
 
 import com.block7crudvalidation.block7crudvalidation.Estudiante.domain.Estudiante;
 import com.block7crudvalidation.block7crudvalidation.Estudiante.repository.EstudianteRepository;
+import com.block7crudvalidation.block7crudvalidation.Profesor.controller.dto.ProfesorOutputDto;
 import com.block7crudvalidation.block7crudvalidation.Profesor.domain.Profesor;
 import com.block7crudvalidation.block7crudvalidation.Profesor.repository.ProfesorRepository;
 import com.block7crudvalidation.block7crudvalidation.exception.domain.EntityNotFoundException;
@@ -60,7 +61,7 @@ public class PersonaServiceImpl implements PersonaService {
             return personaRepository.getPersonaProfesor(id_Persona).personaToPersonaProfesorOutputDto();
         } else if (estudiante != null) {
             return personaRepository.getPersonaEstudiante(id_Persona).personaToPersonaEstudianteOutputDto();
-        }else{
+        } else {
             return persona.personaToPersonOutputDto();
         }
     }
