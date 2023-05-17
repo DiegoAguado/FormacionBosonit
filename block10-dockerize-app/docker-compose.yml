@@ -1,0 +1,29 @@
+version: "3.2"
+services:
+  mispringboot:
+    image: mispringbootimagen
+    container_name: mispringbootcontenedor
+    build: .
+    ports:
+      - "8080:8080"
+    links:
+      - postgrestest
+    depends_on:
+      - postgrestest
+    networks:
+      - mynetwork
+
+  postgrestest:
+    container_name: postgrestest
+    image: postgres
+#    ports:
+#      - "5432:5432"
+    networks:
+      - mynetwork
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: contrasena
+      POSTGRES_DB: test
+networks:
+  mynetwork:
+    driver: bridge
