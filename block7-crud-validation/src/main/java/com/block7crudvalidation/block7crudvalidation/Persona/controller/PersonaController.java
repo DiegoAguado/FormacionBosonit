@@ -2,7 +2,6 @@ package com.block7crudvalidation.block7crudvalidation.Persona.controller;
 
 import com.block7crudvalidation.block7crudvalidation.Feign.MyFeign;
 import com.block7crudvalidation.block7crudvalidation.Persona.application.PersonaService;
-import com.block7crudvalidation.block7crudvalidation.Profesor.controller.dto.ProfesorOutputDto;
 import com.block7crudvalidation.block7crudvalidation.exception.domain.EntityNotFoundException;
 import com.block7crudvalidation.block7crudvalidation.exception.domain.UnprocessableEntityException;
 import com.block7crudvalidation.block7crudvalidation.Persona.controller.dto.PersonaInputDto;
@@ -11,23 +10,21 @@ import feign.Feign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/persona")
+@CrossOrigin(origins = "https://cdpn.io")
 public class PersonaController {
     @Autowired
     PersonaService personaService;
 
-    @PostMapping
+
+    @PostMapping("/addperson")
     public ResponseEntity<PersonaOutputDto> addPersona(@RequestBody PersonaInputDto personaInputDto) throws UnprocessableEntityException {
-        URI location = URI.create("/persona");
         try {
-            return ResponseEntity.created(location).body(personaService.addPersona(personaService.validacion(personaInputDto)));
+            return ResponseEntity.ok().body(personaService.addPersona(personaService.validacion(personaInputDto)));
         } catch (UnprocessableEntityException e) {
             throw new UnprocessableEntityException(e.getMessage());
         }
@@ -60,7 +57,7 @@ public class PersonaController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/getall")
     public ResponseEntity<List> getPersonas(@RequestParam(defaultValue = "simple") String outputType) throws EntityNotFoundException {
         if (outputType.equalsIgnoreCase("full")) {
             List<Object> personaList = new ArrayList<>();

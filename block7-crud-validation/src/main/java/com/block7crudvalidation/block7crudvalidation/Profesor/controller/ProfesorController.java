@@ -30,7 +30,7 @@ public class ProfesorController {
         }
     }
 
-    @GetMapping("/{id_Profesor}")
+    @GetMapping("/profesor/{id_Profesor}")
     public ResponseEntity getProfesor(@PathVariable int id_Profesor, @RequestParam (defaultValue = "simple") String outputType) throws EntityNotFoundException {
         try{
             if(outputType.equals("full")) return ResponseEntity.ok().body(profesorService.getProfesorFull(id_Profesor));
