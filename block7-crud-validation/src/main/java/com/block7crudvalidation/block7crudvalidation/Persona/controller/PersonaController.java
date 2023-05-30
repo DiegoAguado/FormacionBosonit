@@ -2,16 +2,21 @@ package com.block7crudvalidation.block7crudvalidation.Persona.controller;
 
 import com.block7crudvalidation.block7crudvalidation.Feign.MyFeign;
 import com.block7crudvalidation.block7crudvalidation.Persona.application.PersonaService;
+import com.block7crudvalidation.block7crudvalidation.Persona.repository.PersonaRepository;
+import com.block7crudvalidation.block7crudvalidation.Persona.repository.PersonaRepositoryImpl;
 import com.block7crudvalidation.block7crudvalidation.exception.domain.EntityNotFoundException;
 import com.block7crudvalidation.block7crudvalidation.exception.domain.UnprocessableEntityException;
 import com.block7crudvalidation.block7crudvalidation.Persona.controller.dto.PersonaInputDto;
 import com.block7crudvalidation.block7crudvalidation.Persona.controller.dto.PersonaOutputDto;
 import feign.Feign;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -19,6 +24,8 @@ import java.util.List;
 public class PersonaController {
     @Autowired
     PersonaService personaService;
+    @Autowired
+    PersonaRepositoryImpl personaRepository;
 
 
     @PostMapping("/addperson")
@@ -105,5 +112,29 @@ public class PersonaController {
     public ResponseEntity<String> getProfesorFeign(@PathVariable int id_Profesor) throws EntityNotFoundException {
         MyFeign myFeign = Feign.builder().target(MyFeign.class, "http://localhost:8081/profesor/"+id_Profesor);
         return ResponseEntity.ok().body(myFeign.getProfesor());
+    }
+
+    @GetMapping("/")
+    public Iterable<PersonaOutputDto> findStudentByNameAndOrLastname(
+            @RequestParam(required = false) String usuario,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String surname,
+            @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date created_date,
+            @RequestParam(required = false) String dateCondition,
+            @RequestParam(required = false) String order,
+            @RequestParam(required = false, defaultValue = "10") Integer pageSize,
+            @RequestParam Integer pageNumber){
+        HashMap<String, Object> conditions = new HashMap<>();
+
+        if(usuario != null) conditions.put("usuario", usuario);
+        if(name != null) conditions.put("name", name);
+        if(surname != null) conditions.put("surname", surname);
+        if(created_date != null) conditions.put("created_date", created_date);
+        if(dateCondition != null) conditions.put("dateCondition", dateCondition);
+        if(order != null) conditions.put("order", order);
+        conditions.put("pageSize", pageSize);
+        conditions.put("pageNumber", pageNumber);
+
+        return personaRepository.getCustomQuery(conditions);
     }
 }
